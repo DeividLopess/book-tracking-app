@@ -1,34 +1,65 @@
-<h1 align="center">
-  <img src="frontend/src/assets/logo.svg" alt="Logo" width="50" style="vertical-align: -10px;" />
-  Cat-alog
-</h1>
+<p align="center">
+  <img src="frontend/src/assets/logo.svg" alt="Cat-alog Logo" width="100">
+</p>
 
-A simple web application to organize your books, track your reading progress, and keep all your reading information in one place.
+<h1 align="center">Cat-alog</h1>
 
-## Features
+<p align="center">
+  Organize your books, track your reading progress, and keep all your reading information in one place.
+</p>
 
-* Add and manage your book collection
-* Track reading status (Not Started, Reading, Finished)
-* Rate your books
-* Mark favorites
-* Store personal notes and comments
-* Save reading start and finish dates
-* Browse books by author and genre
-* Visual book covers and progress tracking
+<p align="center">
+  <img src="https://img.shields.io/badge/React-Frontend-61DAFB?logo=react&logoColor=white" alt="React">
+  <img src="https://img.shields.io/badge/Node.js-Backend-339933?logo=node.js&logoColor=white" alt="Node.js">
+  <img src="https://img.shields.io/badge/SQLite-Database-003B57?logo=sqlite&logoColor=white" alt="SQLite">
+  <img src="https://img.shields.io/badge/Knex-Query%20Builder-D26B38" alt="Knex">
+</p>
 
-## Tech Stack
+---
 
-* Frontend: React
-* Backend: Node.js
-* Database: SQLite
-* Query Builder: Knex
+## 📚 About
 
-## Getting Started
+Cat-alog is a simple web application designed to help readers manage their personal library. Keep track of books you've read, books you're currently reading, and books you plan to read, all in one place.
+
+---
+
+## ✨ Features
+
+- 📖 Add and manage your book collection
+- 📊 Track reading progress
+- ⭐ Rate your books
+- ❤️ Mark favorite books
+- 📝 Save personal notes and comments
+- 📅 Record reading start and finish dates
+- 👤 Organize books by author
+- 🏷️ Categorize books by genre
+- 🖼️ Store and display book covers
+- 🔍 Browse and search your collection
+
+## 📸 Preview
+
+<p align="center">
+  <img src="frontend/src/assets/menu-screenshot.png" alt="Application Preview" width="900">
+</p>
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Make sure you have installed:
+
+- Node.js
+- npm
+
+---
 
 ### Installation
 
 ```bash
 git clone https://github.com/your-username/book-tracking-app.git
+cd book-tracking-app
 npm install
 ```
 
@@ -37,3 +68,15 @@ npm install
 ```bash
 npm run dev
 ```
+
+The application should now be running locally.
+
+## 📄 License
+
+This project is available under the MIT License.
+
+---
+
+<p align="center">
+  Made with ❤️ for my girlfriend and book lovers
+</p>
