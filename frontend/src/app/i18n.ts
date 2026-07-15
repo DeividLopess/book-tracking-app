@@ -2,7 +2,7 @@ export type Language = "pt" | "en";
 
 export const translations = {
   pt: {
-    appTitle: "Minha Biblioteca",
+    appTitle: "Meu Gatálago",
     header: {
       booksCount: "{count} livros",
       about: "Sobre nós",
@@ -133,7 +133,7 @@ export const translations = {
     },
   },
   en: {
-    appTitle: "My Library",
+    appTitle: "My Catalog",
     header: {
       booksCount: "{count} books",
       about: "About us",

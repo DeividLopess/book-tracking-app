@@ -1,6 +1,7 @@
-# 📚 My Reads
-<img src="frontend/src/assets/logo.svg" alt="Logo" width="200">
-
+<h1 align="center">
+  <img src="frontend/src/assets/logo.svg" alt="Logo" width="50" style="vertical-align: -10px;" />
+  Cat-alog
+</h1>
 
 A simple web application to organize your books, track your reading progress, and keep all your reading information in one place.
 
@@ -27,7 +28,7 @@ A simple web application to organize your books, track your reading progress, an
 ### Installation
 
 ```bash
-git clone https://github.com/your-username/my-reads.git
+git clone https://github.com/your-username/book-tracking-app.git
 npm install
 ```
 
