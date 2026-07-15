@@ -13,7 +13,6 @@
   > Concluído em **13/07/2026**
 
 - [x] 📝 Descrição opcional para salvar o livro
-
   > Concluído em **13/07/2026**
 
 - [x] 🎨 Substituir cores pré-definidas por seletor de cor (`input type="color"`)
@@ -52,15 +51,16 @@
   - [x] 📊 Guia de avaliações com colunas por rating
     > Concluído em **14/07/2026**
 
+  - [X] 🎯 Criar logo do projeto
+  > Concluído em **13/07/2026**
+
 ### ⏳ Em andamento / Pendente
 
 - [ ] 📱 Corrigir exibição das imagens em dispositivos móveis (responsividade)
 
-- [ ] 🎯 Criar logo do projeto
+- [ ] Corrigir o elemento de guias que está muito grande
 
-- [ ] Corrigir o elemento de guias que está mioto grande desnecessáriamente
-
-- [ ] Melhorar o da guia de 
+- [ ] Melhorar o da guia de avaliações
 
 ---
 
@@ -82,13 +82,4 @@
 
 ---
 
-## 📊 Resumo
-
-| Status       | Quantidade |
-| ------------ | ---------: |
-| ✅ Concluído |         12 |
-| ⏳ Pendente  |          4 |
-
-**Progresso geral:** `75%` 🎉
-
-> Última atualização: **14/07/2026**
+> Última atualização: **15/07/2026**

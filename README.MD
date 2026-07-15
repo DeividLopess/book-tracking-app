@@ -1,4 +1,6 @@
 # 📚 My Reads
+<img src="frontend/src/assets/logo.svg" alt="Logo" width="200">
+
 
 A simple web application to organize your books, track your reading progress, and keep all your reading information in one place.
 

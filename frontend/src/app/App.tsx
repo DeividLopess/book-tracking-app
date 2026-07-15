@@ -78,8 +78,8 @@ export default function App() {
         <header className="mb-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-primary/10">
-                <BookOpen size={20} className="text-primary" />
+              <div className="flex h-18 w-18 items-center justify-center rounded-full border border-border bg-primary/10">
+                <img src="./src/assets/logo.svg" alt="Logo" />
               </div>
               <div>
                 <h1 className="text-foreground leading-none" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: "clamp(1.5rem, 3vw, 2.25rem)" }}>{t.appTitle}</h1>
