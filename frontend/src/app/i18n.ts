@@ -6,7 +6,7 @@ export const translations = {
     header: {
       booksCount: "{count} livros",
       about: "Sobre nós",
-      aboutDescription: "Organize seus livros, acompanhe sua leitura e acompanhe seu progresso em um só lugar.",
+      aboutDescription: "Organize seus livros, acompanhe suas leituras e o seu progresso em um só lugar.",
       aboutContent: "## Sobre\nEste aplicativo foi desenvolvido por Deivid Lopes com o objetivo de oferecer uma experiência simples, prática e totalmente gratuita.\n\nSe quiser acompanhar meu trabalho ou entrar em contato, você pode me encontrar em:\n\n- **Instagram:** @deividdlopesss\n- **LinkedIn:** /deividlopes\nCaso tenha sugestões, encontre algum problema ou queira compartilhar uma ideia para melhorar o aplicativo, envie um e-mail para **[mybooks@gmail.com](mailto:mybooks@gmail.com)**.\n\n### Apoie o projeto\nEste é um aplicativo gratuito e mantido de forma independente. Se ele foi útil para você e deseja contribuir com a manutenção e evolução do projeto, qualquer doação será muito bem-vinda.\n\n**PIX:**\n\n- **Chave:** [Sua chave PIX]\n- **QR Code:** (exibir QR Code)",
     },
     tabs: {
