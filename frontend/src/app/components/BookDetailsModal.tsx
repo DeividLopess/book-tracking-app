@@ -41,6 +41,7 @@ export function BookDetailsModal({ book, language, onClose }: Props) {
   const refreshComments = async () => {
     try {
       const response = await apiRequest(`/books/${book.id}/comments`);
+
       const data = (await response.json()) as {
         comments: BookComment[];
       };
@@ -81,6 +82,8 @@ export function BookDetailsModal({ book, language, onClose }: Props) {
       });
 
       setEditingCommentId(null);
+      setEditingCommentContent("");
+
       await refreshComments();
     } catch {
       setCommentError("Não foi possível editar comentário.");
@@ -118,16 +121,59 @@ export function BookDetailsModal({ book, language, onClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 animate-in fade-in duration-300"
+      className="
+        fixed
+        inset-0
+        z-50
+        flex
+        items-center
+        justify-center
+        bg-black/60
+        p-3
+        sm:p-4
+        animate-in
+        fade-in
+        duration-300
+      "
       onClick={onClose}
     >
       <div
-        className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-xl bg-card shadow-2xl animate-in fade-in zoom-in-95 duration-300"
+        className="
+          max-h-[95vh]
+          w-full
+          max-w-3xl
+          overflow-y-auto
+          rounded-xl
+          bg-card
+          shadow-2xl
+          animate-in
+          fade-in
+          zoom-in-95
+          duration-300
+          sm:max-h-[90vh]
+        "
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between border-b p-5">
+        <div
+          className="
+            flex
+            items-start
+            justify-between
+            gap-3
+            border-b
+            p-4
+            sm:p-5
+          "
+        >
           <h2
-            className="text-2xl font-semibold"
+            className="
+              min-w-0
+              flex-1
+              text-xl
+              font-semibold
+              leading-tight
+              sm:text-2xl
+            "
             style={{
               fontFamily: "'Playfair Display', serif",
             }}
@@ -137,17 +183,39 @@ export function BookDetailsModal({ book, language, onClose }: Props) {
 
           <button
             onClick={onClose}
-            className="rounded-full p-2 hover:bg-muted"
+            className="
+              flex-shrink-0
+              rounded-full
+              p-2
+              hover:bg-muted
+              active:bg-muted
+            "
           >
             <X size={20} />
           </button>
         </div>
 
-        <div className="grid gap-6 p-6 md:grid-cols-[220px_1fr]">
+        <div
+          className="
+            grid
+            gap-5
+            p-4
+            sm:p-6
+            md:grid-cols-[220px_1fr]
+          "
+        >
           <img
             src={book.image_url}
             alt={book.name}
-            className="w-full rounded-lg object-cover shadow-lg"
+            className="
+              mx-auto
+              aspect-[2/3]
+              w-40
+              rounded-lg
+              object-cover
+              shadow-lg
+              sm:w-full
+            "
           />
 
           <div className="space-y-4">
@@ -156,43 +224,52 @@ export function BookDetailsModal({ book, language, onClose }: Props) {
             <div className="flex items-center gap-3">
               <StarRating value={ratingValue(book)} />
 
-              {book.favorite && (
-                <Heart
-                  size={18}
-                  className="fill-destructive text-destructive"
-                />
-              )}
+          {!!book.favorite && (
+            <Heart
+              size={14}
+              className="fill-destructive text-destructive"
+              aria-label={t.bookForm.favorite}
+            />
+          )}
             </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="min-w-0">
                 <p className="text-xs text-muted-foreground">Status</p>
-                <p>{t.library.status[book.status]}</p>
+
+                <p className="truncate">{t.library.status[book.status]}</p>
               </div>
 
-              <div>
+              <div className="min-w-0">
                 <p className="text-xs text-muted-foreground">Gênero</p>
-                <p>{book.genre}</p>
+
+                <p className="truncate">{book.genre}</p>
               </div>
 
-              <div>
+              <div className="min-w-0">
                 <p className="text-xs text-muted-foreground">Páginas</p>
+
                 <p>{book.pages}</p>
               </div>
 
-              <div>
+              <div className="min-w-0">
                 <p className="text-xs text-muted-foreground">Data</p>
-                <p>{formatted}</p>
+
+                <p className="truncate">{formatted}</p>
               </div>
             </div>
 
             {book.description && (
               <div>
-                <h3 className="mb-2 font-semibold">
-                  Descrição
-                </h3>
+                <h3 className="mb-2 font-semibold">Descrição</h3>
 
-                <p className="whitespace-pre-wrap text-muted-foreground">
+                <p
+                  className="
+                    whitespace-pre-wrap
+                    text-sm
+                    leading-relaxed
+                    text-muted-foreground
+                  "
+                >
                   {book.description}
                 </p>
               </div>
@@ -201,58 +278,116 @@ export function BookDetailsModal({ book, language, onClose }: Props) {
         </div>
 
         {/* COMENTÁRIOS */}
-        <div className="border-t p-6 space-y-4">
-          <h3 className="font-semibold">
-            {t.tabs.comments}
-          </h3>
+        <div
+          className="
+            space-y-4
+            border-t
+            p-4
+            sm:p-6
+          "
+        >
+          <h3 className="font-semibold">{t.tabs.comments}</h3>
 
           <textarea
             value={commentDraft}
             onChange={(e) => setCommentDraft(e.target.value)}
             rows={3}
             placeholder="Adicionar comentário..."
-            className="w-full resize-none border bg-input-background p-3 text-sm"
+            className="
+              w-full
+              resize-none
+              rounded-md
+              border
+              bg-input-background
+              p-3
+              text-sm
+              outline-none
+              focus:ring-1
+              focus:ring-primary
+            "
           />
 
           <button
             onClick={addComment}
             disabled={!commentDraft.trim()}
-            className="bg-primary px-4 py-2 text-sm text-primary-foreground disabled:opacity-40"
+            className="
+              w-full
+              rounded-md
+              bg-primary
+              px-4
+              py-3
+              text-sm
+              text-primary-foreground
+              transition-opacity
+              disabled:opacity-40
+              sm:w-auto
+            "
           >
             Adicionar
           </button>
 
           {commentError && (
-            <p className="text-sm text-destructive">
-              {commentError}
-            </p>
+            <p className="text-sm text-destructive">{commentError}</p>
           )}
 
           <div className="space-y-3">
             {comments.map((comment) => (
               <div
                 key={comment.id}
-                className="border p-3"
+                className="
+                  rounded-md
+                  border
+                  p-3
+                  sm:p-4
+                "
               >
-                <div className="flex justify-between">
-                  <span className="text-xs text-muted-foreground">
+                <div
+                  className="
+                    flex
+                    flex-col
+                    gap-2
+                    sm:flex-row
+                    sm:items-center
+                    sm:justify-between
+                  "
+                >
+                  <span
+                    className="
+                      text-xs
+                      text-muted-foreground
+                    "
+                  >
                     {new Date(comment.created_at).toLocaleString(locale)}
                   </span>
 
-                  <div className="flex gap-2">
+                  <div className="flex gap-3">
                     <button
                       onClick={() => {
                         setEditingCommentId(comment.id);
                         setEditingCommentContent(comment.content);
                       }}
+                      className="
+                        rounded-md
+                        p-1.5
+                        transition-colors
+                        hover:bg-muted
+                      "
+                      aria-label="Editar comentário"
                     >
-                      <Edit2 size={14}/>
+                      <Edit2 size={15} />
                     </button>
 
                     <button
                       onClick={() => deleteComment(comment.id)}
+                      className="
+                        rounded-md
+                        p-1.5
+                        transition-colors
+                        hover:bg-muted
+                      "
+                      aria-label="Excluir comentário"
                     >
-                      <Trash2 size={14}/>
+                      <Trash2 size={15} />
                     </button>
                   </div>
                 </div>
@@ -261,21 +396,45 @@ export function BookDetailsModal({ book, language, onClose }: Props) {
                   <>
                     <textarea
                       value={editingCommentContent}
-                      onChange={(e) =>
-                        setEditingCommentContent(e.target.value)
-                      }
-                      className="mt-2 w-full border p-2"
+                      onChange={(e) => setEditingCommentContent(e.target.value)}
+                      className="
+                        mt-3
+                        min-h-24
+                        w-full
+                        resize-none
+                        rounded-md
+                        border
+                        p-2
+                        text-sm
+                      "
                     />
 
                     <button
                       onClick={() => updateComment(comment.id)}
-                      className="mt-2 bg-primary px-3 py-1 text-sm text-primary-foreground"
+                      className="
+                        mt-2
+                        w-full
+                        rounded-md
+                        bg-primary
+                        px-3
+                        py-2
+                        text-sm
+                        text-primary-foreground
+                        sm:w-auto
+                      "
                     >
                       Salvar
                     </button>
                   </>
                 ) : (
-                  <p className="mt-2 whitespace-pre-wrap text-sm">
+                  <p
+                    className="
+                      mt-3
+                      whitespace-pre-wrap
+                      break-words
+                      text-sm
+                    "
+                  >
                     {comment.content}
                   </p>
                 )}
@@ -283,7 +442,6 @@ export function BookDetailsModal({ book, language, onClose }: Props) {
             ))}
           </div>
         </div>
-
       </div>
     </div>
   );
