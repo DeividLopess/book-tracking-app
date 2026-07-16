@@ -9,6 +9,7 @@ type BookCardProps = {
   book: Book;
   onEdit: () => void;
   onDelete: () => void;
+  onView: () => void;
   language: Language;
   viewMode: ViewMode;
 };
@@ -17,6 +18,7 @@ export function BookCard({
   book,
   onEdit,
   onDelete,
+  onView,
   language,
   viewMode,
 }: BookCardProps) {
@@ -40,7 +42,10 @@ export function BookCard({
   // ===========================
   if (viewMode === "grid") {
     return (
-      <div className="group overflow-hidden rounded-md border border-border bg-card transition-all duration-200 hover:border-accent/40 hover:shadow-lg">
+      <div
+        onClick={onView}
+        className="group cursor-pointer overflow-hidden rounded-md border border-border bg-card transition-all duration-300 hover:scale-[1.03] hover:border-accent/40 hover:shadow-xl hover:bg-accent/5"
+      >
         <div className="h-1" style={{ backgroundColor: book.coverColor }} />
 
         <div className="relative">
@@ -52,14 +57,20 @@ export function BookCard({
 
           <div className="absolute top-2 right-2 z-20 flex gap-2">
             <button
-              onClick={onEdit}
+              onClick={(e) => {
+                e.stopPropagation();
+                onEdit();
+              }}
               className="flex h-8 w-8 items-center justify-center rounded-full bg-background/90 shadow-md backdrop-blur transition-colors hover:text-accent"
             >
               <Edit2 size={15} />
             </button>
 
             <button
-              onClick={onDelete}
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete();
+              }}
               className="flex h-8 w-8 items-center justify-center rounded-full bg-background/90 shadow-md backdrop-blur transition-colors hover:text-destructive"
             >
               <Trash2 size={15} />
@@ -138,7 +149,10 @@ export function BookCard({
   // ===========================
 
   return (
-    <div className="group flex flex-row overflow-hidden border border-border bg-card transition-all duration-200 hover:border-accent/40 hover:shadow-md">
+    <div
+      onClick={onView}
+      className="group flex cursor-pointer flex-row overflow-hidden border border-border bg-card transition-all duration-300 hover:scale-[1.02] hover:border-accent/40 hover:shadow-lg hover:bg-accent/5"
+    >
       <div
         className="h-auto w-1.5 flex-shrink-0 sm:w-2"
         style={{ backgroundColor: book.coverColor }}
@@ -176,7 +190,10 @@ export function BookCard({
 
           <div className="flex flex-shrink-0 gap-2">
             <button
-              onClick={onEdit}
+              onClick={(e) => {
+                e.stopPropagation();
+                onEdit();
+              }}
               className="flex h-8 w-8 items-center justify-center rounded-full bg-background/90 shadow-md backdrop-blur transition-all duration-200 hover:scale-105 hover:text-accent"
               aria-label="Editar"
             >
@@ -184,7 +201,10 @@ export function BookCard({
             </button>
 
             <button
-              onClick={onDelete}
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete();
+              }}
               className="flex h-8 w-8 items-center justify-center rounded-full bg-background/90 shadow-md backdrop-blur transition-all duration-200 hover:scale-105 hover:text-destructive"
               aria-label="Excluir"
             >

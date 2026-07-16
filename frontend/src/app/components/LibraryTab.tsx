@@ -11,6 +11,7 @@ import {
   type ReadingStatus,
 } from "./common";
 import { ConfirmDeleteModal } from "./ConfirmDeleteModal";
+import { BookDetailsModal } from "./BookDetailsModal";
 
 export function LibraryTab({
   books,
@@ -36,6 +37,7 @@ export function LibraryTab({
   const [sortBy, setSortBy] = useState<"date" | "name" | "rating">("date");
   const [viewMode, setViewMode] = useState<"list" | "grid">("list");
   const [bookToDelete, setBookToDelete] = useState<Book | null>(null);
+  const [selectedBook, setSelectedBook] = useState<Book | null>(null);
 
   useEffect(() => {
     setFilterGenre(t.library.all);
@@ -296,6 +298,7 @@ export function LibraryTab({
             <BookCard
               key={book.id}
               book={book}
+              onView={() => setSelectedBook(book)}
               onEdit={() => onEdit(book)}
               onDelete={() => setBookToDelete(book)}
               language={language}
@@ -315,6 +318,11 @@ export function LibraryTab({
             setBookToDelete(null);
           }}
         />
+        <BookDetailsModal
+    book={selectedBook}
+    language={language}
+    onClose={() => setSelectedBook(null)}
+/>
       </div>
     </div>
   );
