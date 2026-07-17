@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, type ChangeEvent } from "react";
 import { ChevronDown, Plus } from "lucide-react";
 import { getTranslation } from "../i18n";
 import { BookCard } from "./BookCard";
+import { Search } from "lucide-react";
 import {
   bookDate,
   ratingValue,
@@ -134,15 +135,22 @@ export function LibraryTab({
       </div>
 
       <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
-        <input
-          value={search}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setSearch(e.currentTarget.value)
-          }
-          placeholder={t.actions.searchPlaceholder}
-          className="w-full flex-1 bg-card border border-border px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring"
-          style={{ fontFamily: "'Nunito', sans-serif" }}
-        />
+        <div className="relative w-full flex-1">
+          <Search
+            size={18}
+            className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+          />
+
+          <input
+            value={search}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setSearch(e.currentTarget.value)
+            }
+            placeholder={t.actions.searchPlaceholder}
+            className="w-full bg-card border border-border py-2 pl-10 pr-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring"
+            style={{ fontFamily: "'Nunito', sans-serif" }}
+          />
+        </div>
 
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:flex-1 sm:items-center">
           <div className="relative">
@@ -319,10 +327,10 @@ export function LibraryTab({
           }}
         />
         <BookDetailsModal
-    book={selectedBook}
-    language={language}
-    onClose={() => setSelectedBook(null)}
-/>
+          book={selectedBook}
+          language={language}
+          onClose={() => setSelectedBook(null)}
+        />
       </div>
     </div>
   );
