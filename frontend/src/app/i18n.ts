@@ -6,8 +6,10 @@ export const translations = {
     header: {
       booksCount: "{count} livros",
       about: "Sobre nós",
-      aboutDescription: "Organize seus livros, acompanhe suas leituras e o seu progresso em um só lugar.",
-      aboutContent: "## Sobre\nEste aplicativo foi desenvolvido por Deivid Lopes com o objetivo de oferecer uma experiência simples, prática e totalmente gratuita.\n\nSe quiser acompanhar meu trabalho ou entrar em contato, você pode me encontrar em:\n\n- **Instagram:** @deividdlopesss\n- **LinkedIn:** /deividlopes\nCaso tenha sugestões, encontre algum problema ou queira compartilhar uma ideia para melhorar o aplicativo, envie um e-mail para **[mybooks@gmail.com](mailto:mybooks@gmail.com)**.\n\n### Apoie o projeto\nEste é um aplicativo gratuito e mantido de forma independente. Se ele foi útil para você e deseja contribuir com a manutenção e evolução do projeto, qualquer doação será muito bem-vinda.\n\n**PIX:**\n\n- **Chave:** [Sua chave PIX]\n- **QR Code:** (exibir QR Code)",
+      aboutDescription:
+        "Organize seus livros, acompanhe suas leituras e o seu progresso em um só lugar.",
+      aboutContent:
+        "## Sobre\nEste aplicativo foi desenvolvido por Deivid Lopes com o objetivo de oferecer uma experiência simples, prática e totalmente gratuita.\n\nSe quiser acompanhar meu trabalho ou entrar em contato, você pode me encontrar em:\n\n- **Instagram:** @deividdlopesss\n- **LinkedIn:** /deividlopes\nCaso tenha sugestões, encontre algum problema ou queira compartilhar uma ideia para melhorar o aplicativo, envie um e-mail para **[mybooks@gmail.com](mailto:mybooks@gmail.com)**.\n\n### Apoie o projeto\nEste é um aplicativo gratuito e mantido de forma independente. Se ele foi útil para você e deseja contribuir com a manutenção e evolução do projeto, qualquer doação será muito bem-vinda.\n\n**PIX:**\n\n- **Chave:** [Sua chave PIX]\n- **QR Code:** (exibir QR Code)",
     },
     tabs: {
       library: "Biblioteca",
@@ -42,7 +44,8 @@ export const translations = {
       genre: "Gênero",
       pages: "Páginas",
       startedAt: "Data de início (opcional)",
-      startedAtHint: "Você pode deixar este campo vazio e manter o livro na lista sem começar ainda.",
+      startedAtHint:
+        "Você pode deixar este campo vazio e manter o livro na lista sem começar ainda.",
       finishedAt: "Data de término",
       imageUrl: "URL da imagem",
       rating: "Avaliação",
@@ -68,8 +71,10 @@ export const translations = {
       addAuthor: "Adicionar novo autor",
       genrePlaceholder: "Digite o nome do gênero",
       authorPlaceholder: "Digite o nome do autor",
-      genreListHint: "Os gêneros cadastrados aparecerão automaticamente nas listas do formulário.",
-      authorListHint: "Os autores cadastrados aparecerão automaticamente nas listas do formulário.",
+      genreListHint:
+        "Os gêneros cadastrados aparecerão automaticamente nas listas do formulário.",
+      authorListHint:
+        "Os autores cadastrados aparecerão automaticamente nas listas do formulário.",
       confirmDeleteGenre: "Excluir o gênero",
       confirmDeleteAuthor: "Excluir o autor",
       filterLabel: "Filtros ativos",
@@ -104,7 +109,8 @@ export const translations = {
     calendar: {
       legend: "Legenda",
       noReadingPeriods: "Nenhum livro com data de início cadastrada.",
-      monthLabel: "Os períodos de leitura aparecem com a cor escolhida para cada livro.",
+      monthLabel:
+        "Os períodos de leitura aparecem com a cor escolhida para cada livro.",
       prevMonth: "Mês anterior",
       nextMonth: "Próximo mês",
       inProgress: "em andamento",
@@ -117,7 +123,8 @@ export const translations = {
       booksByMonth: "Livros por mês",
       booksByMonthHint: "Mostra quantos livros foram concluídos em cada mês.",
       totalAccumulated: "Total acumulado",
-      totalAccumulatedHint: "Mostra o crescimento do total de livros lidos ao longo do tempo.",
+      totalAccumulatedHint:
+        "Mostra o crescimento do total de livros lidos ao longo do tempo.",
       chartBooks: "Livros",
       chartTotal: "Total",
       genreDistribution: "Distribuição por gênero",
@@ -131,14 +138,19 @@ export const translations = {
     emptyStates: {
       noBooks: "Nenhum livro encontrado.",
     },
+    footer: {
+      backToTop: "voltar ao início",
+    },
   },
   en: {
     appTitle: "My Catalog",
     header: {
       booksCount: "{count} books",
       about: "About us",
-      aboutDescription: "Organize your books, track your reading, and monitor your progress in one place.",
-      aboutContent: "## About\nThis app was developed by Deivid Lopes with the goal of offering a simple, practical, and completely free experience.\n\nIf you want to follow my work or get in touch, you can find me at:\n\n- **Instagram:** @deividdlopesss\n- **LinkedIn:** /deividlopes\nIf you have suggestions, find any issue, or want to share an idea to improve the app, send an email to **[mybooks@gmail.com](mailto:mybooks@gmail.com)**.\n\n### Support the project\nThis is a free app maintained independently. If it has been useful to you and you want to contribute to its maintenance and evolution, any donation will be greatly appreciated.\n\n**PIX:**\n\n- **Key:** [Your PIX key]\n- **QR Code:** (show QR Code)",
+      aboutDescription:
+        "Organize your books, track your reading, and monitor your progress in one place.",
+      aboutContent:
+        "## About\nThis app was developed by Deivid Lopes with the goal of offering a simple, practical, and completely free experience.\n\nIf you want to follow my work or get in touch, you can find me at:\n\n- **Instagram:** @deividdlopesss\n- **LinkedIn:** /deividlopes\nIf you have suggestions, find any issue, or want to share an idea to improve the app, send an email to **[mybooks@gmail.com](mailto:mybooks@gmail.com)**.\n\n### Support the project\nThis is a free app maintained independently. If it has been useful to you and you want to contribute to its maintenance and evolution, any donation will be greatly appreciated.\n\n**PIX:**\n\n- **Key:** [Your PIX key]\n- **QR Code:** (show QR Code)",
     },
     tabs: {
       library: "Library",
@@ -173,7 +185,8 @@ export const translations = {
       genre: "Genre",
       pages: "Pages",
       startedAt: "Start date (optional)",
-      startedAtHint: "You can leave this field empty and keep the book in the list without starting it yet.",
+      startedAtHint:
+        "You can leave this field empty and keep the book in the list without starting it yet.",
       finishedAt: "Finished date",
       imageUrl: "Image URL",
       rating: "Rating",
@@ -199,8 +212,10 @@ export const translations = {
       addAuthor: "Add new author",
       genrePlaceholder: "Enter the genre name",
       authorPlaceholder: "Enter the author name",
-      genreListHint: "Registered genres will appear automatically in the form lists.",
-      authorListHint: "Registered authors will appear automatically in the form lists.",
+      genreListHint:
+        "Registered genres will appear automatically in the form lists.",
+      authorListHint:
+        "Registered authors will appear automatically in the form lists.",
       confirmDeleteGenre: "Delete the genre",
       confirmDeleteAuthor: "Delete the author",
       filterLabel: "Active filters",
@@ -248,7 +263,8 @@ export const translations = {
       booksByMonth: "Books by month",
       booksByMonthHint: "Shows how many books were completed each month.",
       totalAccumulated: "Total accumulated",
-      totalAccumulatedHint: "Shows the growth of the total books read over time.",
+      totalAccumulatedHint:
+        "Shows the growth of the total books read over time.",
       chartBooks: "Books",
       chartTotal: "Total",
       genreDistribution: "Genre distribution",
@@ -262,6 +278,9 @@ export const translations = {
     emptyStates: {
       noBooks: "No books found.",
     },
+      footer: {
+    backToTop: "Go to top",
+  },
   },
 };
 

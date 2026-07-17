@@ -24,6 +24,7 @@ import {
   type BookForm,
   type Tab,
 } from "./components/common";
+import { Footer } from "./components/Footer";
 
 export default function App() {
   const [books, setBooks] = useState<Book[]>([]);
@@ -338,6 +339,7 @@ export default function App() {
           language={language}
         />
       )}
+      <Footer language={language} />
     </div>
   );
 }
