@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Check, Edit2, Trash2, X } from "lucide-react";
 import { getTranslation } from "../i18n";
-import { apiRequest, type Language, type MetadataItem } from "./common";
+import { type Language, type MetadataItem } from "./common";
+import * as metadataService from "../../services/metadataService";
 
 type MetadataKind = "genres" | "authors";
 
@@ -15,13 +16,12 @@ export function MetadataTab({ language }: { language: Language }) {
   const [newAuthor, setNewAuthor] = useState("");
 
   const refresh = async () => {
-    const [genresResponse, authorsResponse] = await Promise.all([apiRequest("/books/genres"), apiRequest("/books/authors")]);
-    const [genresData, authorsData] = await Promise.all([
-      genresResponse.json() as Promise<{ genres: MetadataItem[] }>,
-      authorsResponse.json() as Promise<{ authors: MetadataItem[] }>,
+    const [nextGenres, nextAuthors] = await Promise.all([
+      metadataService.listGenres(),
+      metadataService.listAuthors(),
     ]);
-    setGenres(genresData.genres);
-    setAuthors(authorsData.authors);
+    setGenres(nextGenres);
+    setAuthors(nextAuthors);
   };
 
   useEffect(() => { refresh().catch(() => undefined); }, []);
@@ -30,8 +30,13 @@ export function MetadataTab({ language }: { language: Language }) {
     const value = (kind === "genres" ? newGenre : newAuthor).trim();
     const items = kind === "genres" ? genres : authors;
     if (!value || items.some((item) => item.name.toLowerCase() === value.toLowerCase())) return;
-    await apiRequest(`/books/${kind}`, { method: "POST", body: JSON.stringify({ name: value }) });
-    if (kind === "genres") setNewGenre(""); else setNewAuthor("");
+    if (kind === "genres") {
+      await metadataService.createGenre({ name: value });
+      setNewGenre("");
+    } else {
+      await metadataService.createAuthor({ name: value });
+      setNewAuthor("");
+    }
     await refresh();
   };
 
@@ -40,14 +45,22 @@ export function MetadataTab({ language }: { language: Language }) {
     const value = (drafts[key] ?? "").trim();
     const items = kind === "genres" ? genres : authors;
     if (!value || items.some((current) => current.id !== item.id && current.name.toLowerCase() === value.toLowerCase())) return;
-    await apiRequest(`/books/${kind}/${item.id}`, { method: "PUT", body: JSON.stringify({ name: value }) });
+    if (kind === "genres") {
+      await metadataService.updateGenre(item.id, { name: value });
+    } else {
+      await metadataService.updateAuthor(item.id, { name: value });
+    }
     setEditing(null);
     await refresh();
   };
 
   const remove = async (kind: MetadataKind, item: MetadataItem) => {
     if (!window.confirm(`${language === "pt" ? "Excluir" : "Delete"} ${item.name}?`)) return;
-    await apiRequest(`/books/${kind}/${item.id}`, { method: "DELETE" });
+    if (kind === "genres") {
+      await metadataService.deleteGenre(item.id);
+    } else {
+      await metadataService.deleteAuthor(item.id);
+    }
     await refresh();
   };
 

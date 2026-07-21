@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Check, ChevronDown, Edit2, Heart, Trash2, X } from "lucide-react";
 import { getTranslation } from "../i18n";
 import {
-  apiRequest,
   COVER_COLORS,
   toForm,
   type Book,
@@ -13,6 +12,8 @@ import {
   type ModalTab,
 } from "./common";
 import { StarRating } from "./StarRating";
+import * as bookService from "../../services/bookService";
+import * as metadataService from "../../services/metadataService";
 
 export function BookModal({
   book,
@@ -46,22 +47,10 @@ export function BookModal({
 
   const refreshMetadata = async () => {
     try {
-      const [genresResponse, authorsResponse] = await Promise.all([
-        apiRequest("/books/genres"),
-        apiRequest("/books/authors"),
+      const [nextGenres, nextAuthors] = await Promise.all([
+        metadataService.listGenres(),
+        metadataService.listAuthors(),
       ]);
-
-      const [genresData, authorsData] = await Promise.all([
-        genresResponse.json() as Promise<{
-          genres: Array<{ id: number; name: string }>;
-        }>,
-        authorsResponse.json() as Promise<{
-          authors: Array<{ id: number; name: string }>;
-        }>,
-      ]);
-
-      const nextGenres = genresData.genres;
-      const nextAuthors = authorsData.authors;
 
       setGenres(nextGenres);
       setAuthors(nextAuthors);
@@ -90,9 +79,8 @@ export function BookModal({
       return;
     }
 
-    const response = await apiRequest(`/books/${book.id}/comments`);
-    const data = (await response.json()) as { comments: BookComment[] };
-    setComments(data.comments);
+    const data = await bookService.listComments(book.id);
+    setComments(data as BookComment[]);
   };
 
   useEffect(() => {
@@ -107,10 +95,7 @@ export function BookModal({
 
     try {
       setCommentError(null);
-      await apiRequest(`/books/${book.id}/comments`, {
-        method: "POST",
-        body: JSON.stringify({ content }),
-      });
+      await bookService.createComment(book.id, { content });
       setCommentDraft("");
       await refreshComments();
     } catch (error) {
@@ -128,10 +113,7 @@ export function BookModal({
 
     try {
       setCommentError(null);
-      await apiRequest(`/books/${book.id}/comments/${commentId}`, {
-        method: "PUT",
-        body: JSON.stringify({ content }),
-      });
+      await bookService.updateComment(book.id, commentId, { content });
       setEditingCommentId(null);
       await refreshComments();
     } catch (error) {
@@ -148,9 +130,7 @@ export function BookModal({
 
     try {
       setCommentError(null);
-      await apiRequest(`/books/${book.id}/comments/${commentId}`, {
-        method: "DELETE",
-      });
+      await bookService.deleteComment(book.id, commentId);
       await refreshComments();
     } catch (error) {
       setCommentError(
@@ -180,10 +160,7 @@ export function BookModal({
       return;
 
     try {
-      await apiRequest("/books/genres", {
-        method: "POST",
-        body: JSON.stringify({ name: value }),
-      });
+      await metadataService.createGenre({ name: value });
       setNewGenre("");
       await refreshMetadata();
       set("genre", value);
@@ -204,10 +181,7 @@ export function BookModal({
       return;
 
     try {
-      await apiRequest(`/books/genres/${id}`, {
-        method: "PUT",
-        body: JSON.stringify({ name: value }),
-      });
+      await metadataService.updateGenre(id, { name: value });
       setEditingGenreId(null);
       await refreshMetadata();
       set("genre", value);
@@ -222,7 +196,7 @@ export function BookModal({
       return;
 
     try {
-      await apiRequest(`/books/genres/${id}`, { method: "DELETE" });
+      await metadataService.deleteGenre(id);
       await refreshMetadata();
     } catch {
       // no-op
@@ -238,10 +212,7 @@ export function BookModal({
       return;
 
     try {
-      await apiRequest("/books/authors", {
-        method: "POST",
-        body: JSON.stringify({ name: value }),
-      });
+      await metadataService.createAuthor({ name: value });
       setNewAuthor("");
       await refreshMetadata();
       set("author", value);
@@ -262,10 +233,7 @@ export function BookModal({
       return;
 
     try {
-      await apiRequest(`/books/authors/${id}`, {
-        method: "PUT",
-        body: JSON.stringify({ name: value }),
-      });
+      await metadataService.updateAuthor(id, { name: value });
       setEditingAuthorId(null);
       await refreshMetadata();
       set("author", value);
@@ -280,7 +248,7 @@ export function BookModal({
       return;
 
     try {
-      await apiRequest(`/books/authors/${id}`, { method: "DELETE" });
+      await metadataService.deleteAuthor(id);
       await refreshMetadata();
     } catch {
       // no-op

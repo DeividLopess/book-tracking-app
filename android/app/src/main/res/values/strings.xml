@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Gatalogo</string>
+    <string name="title_activity_main">Gatalogo</string>
+    <string name="package_name">com.gatalogo.gatalogo</string>
+    <string name="custom_url_scheme">com.gatalogo.gatalogo</string>
+</resources>

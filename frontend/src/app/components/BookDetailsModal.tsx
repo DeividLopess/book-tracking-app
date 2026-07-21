@@ -2,7 +2,6 @@ import { Heart, X, Edit2, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { getTranslation } from "../i18n";
 import {
-  apiRequest,
   ratingValue,
   toDateInput,
   type Book,
@@ -10,6 +9,7 @@ import {
   type Language,
 } from "./common";
 import { StarRating } from "./StarRating";
+import * as bookService from "../../services/bookService";
 
 type Props = {
   book: Book | null;
@@ -39,14 +39,11 @@ export function BookDetailsModal({ book, language, onClose }: Props) {
   if (!book) return null;
 
   const refreshComments = async () => {
+    if (!book.id) return;
+
     try {
-      const response = await apiRequest(`/books/${book.id}/comments`);
-
-      const data = (await response.json()) as {
-        comments: BookComment[];
-      };
-
-      setComments(data.comments);
+      const data = await bookService.listComments(book.id);
+      setComments(data as BookComment[]);
     } catch {
       setCommentError("Não foi possível carregar os comentários.");
     }
@@ -58,10 +55,7 @@ export function BookDetailsModal({ book, language, onClose }: Props) {
     if (!content || !book.id) return;
 
     try {
-      await apiRequest(`/books/${book.id}/comments`, {
-        method: "POST",
-        body: JSON.stringify({ content }),
-      });
+      await bookService.createComment(book.id, { content });
 
       setCommentDraft("");
       await refreshComments();
@@ -76,10 +70,7 @@ export function BookDetailsModal({ book, language, onClose }: Props) {
     if (!content || !book.id) return;
 
     try {
-      await apiRequest(`/books/${book.id}/comments/${id}`, {
-        method: "PUT",
-        body: JSON.stringify({ content }),
-      });
+      await bookService.updateComment(book.id, id, { content });
 
       setEditingCommentId(null);
       setEditingCommentContent("");
@@ -96,9 +87,7 @@ export function BookDetailsModal({ book, language, onClose }: Props) {
     if (!window.confirm("Excluir este comentário?")) return;
 
     try {
-      await apiRequest(`/books/${book.id}/comments/${id}`, {
-        method: "DELETE",
-      });
+      await bookService.deleteComment(book.id, id);
 
       await refreshComments();
     } catch {

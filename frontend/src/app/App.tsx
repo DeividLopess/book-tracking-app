@@ -17,14 +17,12 @@ import { StatsTab } from "./components/StatsTab";
 import { TimelineTab } from "./components/TimelineTab";
 import { MetadataTab } from "./components/MetadataTab";
 import { RatingGuideTab } from "./components/RatingGuideTab";
-import {
-  apiRequest,
-  toPayload,
-  type Book,
-  type BookForm,
-  type Tab,
-} from "./components/common";
+import { toPayload, type Book, type BookForm, type Tab } from "./components/common";
 import { Footer } from "./components/Footer";
+import logo from "../assets/logo.svg";
+
+import { initDatabase } from "../db/database";
+import { listBooks, createBook, updateBook, deleteBook } from "../services/bookService";
 
 export default function App() {
   const [books, setBooks] = useState<Book[]>([]);
@@ -33,19 +31,31 @@ export default function App() {
   const t = getTranslation(language);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [dbReady, setDbReady] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>("library");
   const [modal, setModal] = useState<{ open: boolean; book: Partial<Book> }>({
     open: false,
     book: {},
   });
 
+  // Inicializa o banco SQLite local uma única vez, antes de qualquer
+  // tentativa de ler/escrever dados. Só depois disso é seguro chamar
+  // fetchBooks() ou qualquer outra função do bookService.
+  useEffect(() => {
+    initDatabase()
+      .then(() => setDbReady(true))
+      .catch((err) => {
+        console.error("Falha ao inicializar o banco:", err);
+        setError(t.errors.loadBooks);
+      });
+  }, []);
+
   const fetchBooks = async () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await apiRequest("/books");
-      const data = (await response.json()) as { books: Book[] };
-      setBooks(data.books);
+      const data = await listBooks();
+      setBooks(data);
     } catch {
       setError(t.errors.loadBooks);
     } finally {
@@ -54,22 +64,18 @@ export default function App() {
   };
 
   useEffect(() => {
-    fetchBooks();
-  }, []);
+    if (dbReady) {
+      fetchBooks();
+    }
+  }, [dbReady]);
 
   const handleSave = async (form: BookForm) => {
     try {
       const payload = toPayload(form);
       if (form.id) {
-        await apiRequest(`/books/update/${form.id}`, {
-          method: "PUT",
-          body: JSON.stringify(payload),
-        });
+        await updateBook(form.id, payload);
       } else {
-        await apiRequest("/books", {
-          method: "POST",
-          body: JSON.stringify(payload),
-        });
+        await createBook(payload);
       }
       setModal({ open: false, book: {} });
       await fetchBooks();
@@ -80,7 +86,7 @@ export default function App() {
 
   const handleDelete = async (id: number) => {
     try {
-      await apiRequest(`/books/delete/${id}`, { method: "DELETE" });
+      await deleteBook(id);
       setBooks((prev) => prev.filter((b) => b.id !== id));
     } catch (error) {
       setError(error instanceof Error ? error.message : t.errors.deleteBook);
@@ -111,7 +117,7 @@ export default function App() {
             <div className="flex flex-col items-center sm:flex-row sm:items-center sm:gap-3">
               <div className="flex h-14 w-14 sm:h-18 sm:w-18 items-center justify-center rounded-full border border-border bg-primary/10">
                 <img
-                  src="./src/assets/logo.svg"
+                  src={logo}
                   alt="Logo"
                   className="h-10 w-10 sm:h-auto sm:w-auto"
                 />
